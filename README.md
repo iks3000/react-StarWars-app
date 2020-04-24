@@ -1,10 +1,8 @@
 # Star Wars Data Base
 
-> ### The Star Wars API - https://swapi.dev/
->
+> ### [The Star Wars API](https://swapi.dev/)
 > All the Star Wars data you've ever wanted:
 Planets, Spaceships, Vehicles, People, Films and Species
-
 
 
 ### How to Start
