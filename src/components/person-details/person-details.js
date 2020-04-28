@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SwapiService from '../../services/swapi-service';
 import ErrorIndicator from '../error-indicator';
 import Spinner from '../spinner';
+import ErrorButton from '../error-button';
 
 import './person-details.css';
 
@@ -46,6 +47,7 @@ export default class PersonDetails extends Component {
       });
   }
 
+
   render() {
 
     const { person, loading, error } = this.state;
@@ -75,7 +77,7 @@ export default class PersonDetails extends Component {
             <span>id={this.props.personId}</span>
           </div>
 
-          <ul className="list-group list-group-flush">
+          <ul className="list-group list-group-flush mb-3">
             <li className="list-group-item">
               <span className="term">Gender</span>
               <span>{gender}</span>
@@ -89,6 +91,7 @@ export default class PersonDetails extends Component {
               <span>{eyeColor}</span>
             </li>
           </ul>
+          <ErrorButton />
         </div>
       </div>
     )
