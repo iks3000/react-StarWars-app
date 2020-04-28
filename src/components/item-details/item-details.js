@@ -4,39 +4,40 @@ import ErrorIndicator from '../error-indicator';
 import Spinner from '../spinner';
 import ErrorButton from '../error-button';
 
-import './person-details.css';
+import './item-details.css';
 
 
-export default class PersonDetails extends Component {
+export default class ItemDetails extends Component {
   swapiService = new SwapiService();
 
   state = {
-    person: null,
+    item: null,
+    image: null,
     loading: true,
     error: false,
   };
 
   componentDidMount() {
-    this.updatePerson();
+    this.updateItem();
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.personId !== prevProps.personId) {
-      this.updatePerson();
+    if (this.props.itemId !== prevProps.itemId) {
+      this.updateItem();
     }
   }
 
-  updatePerson() {
-    const { personId } = this.props;
-    if (!personId) {
+  updateItem() {
+    const { itemId, getData, getImgUrl } = this.props;
+    if (!itemId) {
       return;
     }
 
-    this.swapiService
-      .getPerson(personId)
-      .then((person) => {
+    getData(itemId)
+      .then((item) => {
         this.setState({
-          person,
+          item,
+          image: getImgUrl(item),
           loading: false
         });
       })
@@ -50,31 +51,29 @@ export default class PersonDetails extends Component {
 
   render() {
 
-    const { person, loading, error } = this.state;
+    const { item, image, loading, error } = this.state;
 
     if (error) {
       return <ErrorIndicator />
     }
 
-    if (!person) {
-      return <span>Select a person from a list</span>;
+    if (!item) {
+      return <span>Select a item from a list</span>;
     }
 
     if (loading) {
       return <Spinner />;
     }
 
-    const { id, name, gender, birthYear, eyeColor } = this.state.person;
+    const { id, name, gender, birthYear, eyeColor } = this.state.item;
 
     return (
-      <div className="person-details card">
-        <img className="person-image" alt="character"
-          src={`https://starwars-visualguide.com/assets/img/characters/${ id }.jpg`}
-          />
+      <div className="item-details card">
+        <img className="item-image" alt="character" src={image} />
         <div className="card-body">
           <div className="d-flex justify-content-between">
             <h4>{name}</h4>
-            <span>id={this.props.personId}</span>
+            <span>id={this.props.itemId}</span>
           </div>
 
           <ul className="list-group list-group-flush mb-3">

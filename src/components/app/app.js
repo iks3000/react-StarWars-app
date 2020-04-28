@@ -4,11 +4,12 @@ import RandomPlanet from '../random-planet';
 import ErrorButton from '../error-button';
 import ErrorIndicator from '../error-indicator';
 import PeoplePage from '../people-page';
+import Row from '../row';
 
 import './app.css';
-import ItemList from "../item-list";
-import PersonDetails from "../person-details";
+
 import SwapiService from '../../services/swapi-service';
+import ItemDetails from '../item-details';
 
 
 export default class App extends Component {
@@ -40,10 +41,30 @@ export default class App extends Component {
 
     const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
 
+    const { getPerson, getStarship, getPersonImage, getStarshipImage } = this.swapiService;
+
+    const personDetails = (
+      <ItemDetails
+        itemId={11}
+        getData={getPerson}
+        getImgUrl={getPersonImage}
+        />
+    );
+    const starshipDetails = (
+      <ItemDetails
+        itemId={5}
+        getData={getStarship}
+        getImgUrl={getStarshipImage}
+      />
+    )
+
     return (
       <div className="container-fluid">
         <Header />
-        { planet }
+
+        <Row left={personDetails} right={starshipDetails} />
+
+        {/* { planet }
 
         <div className="mb-3">
           <button
@@ -54,7 +75,7 @@ export default class App extends Component {
           <ErrorButton />
         </div>
 
-        <PeoplePage />
+        <PeoplePage /> */}
 
       </div>
     );
