@@ -6,12 +6,20 @@ import ErrorIndicator from '../error-indicator';
 import PeoplePage from '../people-page';
 import Row from '../row';
 import ItemList from '../item-list';
-
 import './app.css';
 
 import SwapiService from '../../services/swapi-service';
 import ItemDetails from '../item-details';
 import Record from '../record';
+
+import {
+  PersonDetails,
+  PlanetDetails,
+  StarshipDetails,
+  PersonList,
+  PlanetList,
+  StarshipList
+} from '../star-wars-components'
 
 
 export default class App extends Component {
@@ -67,27 +75,23 @@ export default class App extends Component {
       </ItemDetails>
     )
 
-    const listPeople = (
-      <ItemList
-        getData={getAllPeople}
-        onItemSelected={() => { }}>
-        {({ name }) => <span>{name}</span>}
-      </ItemList>
-    )
-
-    const listPlanets = (
-      <ItemList
-        getData={getAllPlanets}
-        onItemSelected={() => { }}>
-        {({ name }) => <span>{name}</span>}
-      </ItemList>
-    )
-
     return (
       <div className="container-fluid">
         <Header />
 
-        <Row left={listPeople} right={listPlanets} />
+        <PersonDetails itemId={11} />
+        <StarshipDetails itemId={5} />
+        <PlanetDetails itemId={5} />
+
+        <PersonList>
+          {({ name }) => <span>{name}</span>}
+        </PersonList>
+        <StarshipList>
+          {({ name }) => <span>{name}</span>}
+        </StarshipList>
+        <PlanetList>
+          {({ name }) => <span>{name}</span>}
+        </PlanetList>
 
         {/* <Row left={personDetails} right={starshipDetails} /> */}
 

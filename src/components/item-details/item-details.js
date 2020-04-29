@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import SwapiService from '../../services/swapi-service';
-import ErrorIndicator from '../error-indicator';
-import Spinner from '../spinner';
 import ErrorButton from '../error-button';
-
 import './item-details.css';
 
 
@@ -12,9 +9,7 @@ export default class ItemDetails extends Component {
 
   state = {
     item: null,
-    image: null,
-    loading: true,
-    error: false,
+    image: null
   };
 
   componentDidMount() {
@@ -41,31 +36,18 @@ export default class ItemDetails extends Component {
           loading: false
         });
       })
-      .catch(() => {
-        this.setState({
-          error: true
-        })
-      });
   }
 
 
   render() {
 
-    const { item, image, loading, error } = this.state;
-
-    if (error) {
-      return <ErrorIndicator />
-    }
+    const { item, image } = this.state;
 
     if (!item) {
       return <span>Select a item from a list</span>;
     }
 
-    if (loading) {
-      return <Spinner />;
-    }
-
-    const { id, name, gender, birthYear, eyeColor } = this.state.item;
+    const { name } = this.state.item;
 
     return (
       <div className="item-details card">

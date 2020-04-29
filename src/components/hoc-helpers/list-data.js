@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Spinner from "../spinner/spinner";
-import ErrorIndicator from '../error-indicator';
+import ErrorIndicator from '../error-indicator/error-indicator';
 
-const withData = (View, getData) => {
+const ListData = (View, getData) => {
   return class extends Component {
     state = {
-      data: null
+      data: null,
+      error: false
     };
 
     componentDidMount() {
@@ -14,12 +15,21 @@ const withData = (View, getData) => {
           this.setState({
             data
           });
-        });
+        })
+        .catch(() => {
+          this.setState({
+            error: true
+          })
+        });;
     }
 
     render() {
-      const { data } = this.state;
+      const { data, error } = this.state;
       //console.log(data)
+      if (error) {
+        return <ErrorIndicator />
+      }
+
       if (!data) {
         return <Spinner />;
       }
@@ -28,4 +38,4 @@ const withData = (View, getData) => {
   }
 }
 
-export default withData;
+export default ListData;
