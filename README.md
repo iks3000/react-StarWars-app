@@ -1,3 +1,4 @@
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 # Star Wars Data Base
 
 > ### [The Star Wars API](https://swapi.dev/)

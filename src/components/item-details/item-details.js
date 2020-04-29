@@ -77,18 +77,11 @@ export default class ItemDetails extends Component {
           </div>
 
           <ul className="list-group list-group-flush mb-3">
-            <li className="list-group-item">
-              <span className="term">Gender</span>
-              <span>{gender}</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">Birth Year</span>
-              <span>{birthYear}</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">Eye Color</span>
-              <span>{eyeColor}</span>
-            </li>
+            {
+              React.Children.map(this.props.children, (child) => {
+                return React.cloneElement(child, {item});
+              })
+            }
           </ul>
           <ErrorButton />
         </div>
