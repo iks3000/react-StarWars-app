@@ -4,9 +4,13 @@ import RandomPlanet from '../random-planet';
 import ErrorButton from '../error-button';
 import ErrorIndicator from '../error-indicator';
 import PeoplePage from '../people-page';
+import { SwapiServiceProvider } from '../swapi-service-context';
 import './app.css';
 
+// DummySwapiService Mock for testing
+//import DummySwapiService from '../../services/dummy-swapi-service';
 import SwapiService from '../../services/swapi-service';
+
 
 import {
   PersonDetails,
@@ -16,10 +20,13 @@ import {
   PlanetList,
   StarshipList
 } from '../star-wars-components'
+import ErrorBoundry from '../error-boundry';
 
 
 export default class App extends Component {
 
+  // DummySwapiService Mock for testing
+  //swapiService = new DummySwapiService();
   swapiService = new SwapiService();
 
   state = {
@@ -48,31 +55,35 @@ export default class App extends Component {
     const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
 
     return (
-      <div className="container-fluid">
-        <Header />
+      <ErrorBoundry>
+        <SwapiServiceProvider value={this.swapiService}>
+          <div className="container-fluid">
+            <Header />
 
-        <PersonDetails itemId={11} />
-        <StarshipDetails itemId={5} />
-        <PlanetDetails itemId={5} />
+            <PersonDetails itemId={11} />
+            <StarshipDetails itemId={5} />
+            <PlanetDetails itemId={5} />
 
-        <PersonList />
-        <StarshipList />
-        <PlanetList />
+            <PersonList />
+            <StarshipList />
+            <PlanetList />
 
-        {/* { planet }
+            {/* { planet }
 
-        <div className="mb-3">
-          <button
-            className="toggle-planet btn btn-warning shadow-none mr-3"
-            onClick={this.toggleRandomPlanet}>
-            Toggle Random Planet
-          </button>
-          <ErrorButton />
-        </div>
+            <div className="mb-3">
+              <button
+                className="toggle-planet btn btn-warning shadow-none mr-3"
+                onClick={this.toggleRandomPlanet}>
+                Toggle Random Planet
+              </button>
+              <ErrorButton />
+            </div>
 
-        <PeoplePage /> */}
+            <PeoplePage /> */}
 
-      </div>
+          </div>
+        </SwapiServiceProvider>
+      </ErrorBoundry>
     );
   }
 }
