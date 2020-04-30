@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Spinner from "../spinner/spinner";
 import ErrorIndicator from '../error-indicator/error-indicator';
 
-const ListData = (View, getData) => {
+const withData = (View, getData) => {
   return class extends Component {
     state = {
       data: null,
@@ -38,4 +38,4 @@ const ListData = (View, getData) => {
   }
 }
 
-export default ListData;
+export default withData;

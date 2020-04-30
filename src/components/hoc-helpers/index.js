@@ -1,5 +1,5 @@
-import ListData from './list-data';
+import withData from './with-data';
 
 export {
-  ListData
+  withData
 };
