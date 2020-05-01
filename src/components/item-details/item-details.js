@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SwapiService from '../../services/swapi-service';
 import ErrorButton from '../error-button';
 import './item-details.css';
+import placeholder from './placeholder.jpg';
 
 
 export default class ItemDetails extends Component {
@@ -17,7 +18,9 @@ export default class ItemDetails extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.itemId !== prevProps.itemId) {
+    if (this.props.itemId !== prevProps.itemId ||
+      this.props.getData !== prevProps.getData ||
+      this.props.getImgUrl !== prevProps.getImgUrl) {
       this.updateItem();
     }
   }
@@ -48,10 +51,16 @@ export default class ItemDetails extends Component {
     }
 
     const { name } = this.state.item;
+    const brokenUrlImg = placeholder;
 
     return (
       <div className="item-details card">
-        <img className="item-image" alt="character" src={image} />
+        <img className="item-image" alt="character"
+          src={image}
+          onError={(e) => {
+            e.target.src = brokenUrlImg
+          }}
+        />
         <div className="card-body">
           <div className="d-flex justify-content-between">
             <h4>{name}</h4>

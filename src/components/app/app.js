@@ -1,38 +1,36 @@
 import React, { Component } from 'react';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
-import ErrorButton from '../error-button';
 import ErrorIndicator from '../error-indicator';
-import PeoplePage from '../people-page';
-import { SwapiServiceProvider } from '../swapi-service-context';
-import './app.css';
 
 // DummySwapiService Mock for testing
-//import DummySwapiService from '../../services/dummy-swapi-service';
+import DummySwapiService from '../../services/dummy-swapi-service';
 import SwapiService from '../../services/swapi-service';
 
+import { SwapiServiceProvider } from '../swapi-service-context';
+import { PeoplePage, PlanetsPage, StarshipsPage } from '../pages';
+import './app.css';
 
-import {
-  PersonDetails,
-  PlanetDetails,
-  StarshipDetails,
-  PersonList,
-  PlanetList,
-  StarshipList
-} from '../star-wars-components'
 import ErrorBoundry from '../error-boundry';
-
 
 export default class App extends Component {
 
-  // DummySwapiService Mock for testing
-  //swapiService = new DummySwapiService();
-  swapiService = new SwapiService();
-
   state = {
+    swapiService: new SwapiService(),
     showRandomPlanet: true,
     hasError: false,
   };
+
+  onServiceChange = () => {
+    this.setState(({swapiService}) => {
+      const Service = swapiService instanceof SwapiService ? DummySwapiService : SwapiService;
+      console.log("swiched to", Service.name);
+
+      return {
+        swapiService: new Service()
+      };
+    })
+  }
 
   toggleRandomPlanet = () => {
     this.setState((state) => {
@@ -46,40 +44,33 @@ export default class App extends Component {
     this.setState({hasError: true})
   }
 
+
   render() {
 
     if (this.state.hasError) {
       return <ErrorIndicator />
     }
 
-    const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
+    const planet = this.state.showRandomPlanet ?
+      <RandomPlanet updateInterval={5000} /> : null;
 
     return (
       <ErrorBoundry>
-        <SwapiServiceProvider value={this.swapiService}>
+        <SwapiServiceProvider value={this.state.swapiService}>
           <div className="container-fluid">
-            <Header />
-
-            <PersonDetails itemId={11} />
-            <StarshipDetails itemId={5} />
-            <PlanetDetails itemId={5} />
-
-            <PersonList />
-            <StarshipList />
-            <PlanetList />
-
-            {/* { planet }
-
+            <Header onServiceChange={this.onServiceChange} />
+            {planet}
             <div className="mb-3">
               <button
                 className="toggle-planet btn btn-warning shadow-none mr-3"
                 onClick={this.toggleRandomPlanet}>
                 Toggle Random Planet
               </button>
-              <ErrorButton />
             </div>
 
-            <PeoplePage /> */}
+            <PeoplePage />
+            <PlanetsPage />
+            <StarshipsPage />
 
           </div>
         </SwapiServiceProvider>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { withData } from '../hoc-helpers';
 import './item-list.css';
 
 const ItemList = (props) => {
@@ -24,4 +25,8 @@ const ItemList = (props) => {
   );
 };
 
-export default ItemList;
+ItemList.defaultProps = {
+  onItemSelected: () => {}
+}
+
+export default withData(ItemList);
