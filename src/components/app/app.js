@@ -52,7 +52,7 @@ export default class App extends Component {
     }
 
     const planet = this.state.showRandomPlanet ?
-      <RandomPlanet updateInterval={3000} /> : null;
+      <RandomPlanet /> : null;
 
     return (
       <ErrorBoundry>
@@ -68,9 +68,18 @@ export default class App extends Component {
               </button>
             </div>
 
-            <PeoplePage />
-            <PlanetsPage />
-            <StarshipsPage />
+            <ErrorBoundry>
+              <PeoplePage />
+            </ErrorBoundry>
+
+            <ErrorBoundry>
+              <PlanetsPage />
+            </ErrorBoundry>
+
+            <ErrorBoundry>
+              <StarshipsPage />
+            </ErrorBoundry>
+
 
           </div>
         </SwapiServiceProvider>
