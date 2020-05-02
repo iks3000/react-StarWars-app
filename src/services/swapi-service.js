@@ -111,3 +111,4 @@ export default class SwapiService {
 //   .then((res) => {
 //     console.log(res.count);
 //   });
+

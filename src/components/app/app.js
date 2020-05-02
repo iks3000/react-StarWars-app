@@ -52,7 +52,7 @@ export default class App extends Component {
     }
 
     const planet = this.state.showRandomPlanet ?
-      <RandomPlanet updateInterval={5000} /> : null;
+      <RandomPlanet updateInterval={3000} /> : null;
 
     return (
       <ErrorBoundry>

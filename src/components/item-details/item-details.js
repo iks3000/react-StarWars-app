@@ -51,14 +51,13 @@ export default class ItemDetails extends Component {
     }
 
     const { name } = this.state.item;
-    const brokenUrlImg = placeholder;
 
     return (
       <div className="item-details card">
         <img className="item-image" alt="character"
           src={image}
           onError={(e) => {
-            e.target.src = brokenUrlImg
+            e.target.src = placeholder
           }}
         />
         <div className="card-body">

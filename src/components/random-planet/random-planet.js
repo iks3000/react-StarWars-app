@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 import SwapiService from '../../services/swapi-service';
 import placeholder from './placeholder.jpg';
-
 import './random-planet.css';
 
 export default class RandomPlanet extends Component {
 
   static defaultProps = {
     updateInterval: 10000
+  }
+
+  static propTypes = {
+    updateInterval: PropTypes.number
   }
 
   swapiService = new SwapiService();
@@ -72,9 +76,7 @@ export default class RandomPlanet extends Component {
 }
 
 const PlanetView = ({ planet }) => {
-
   const { id, name, population, rotationPeriod, diameter } = planet;
-  const brokenUrlImg = placeholder;
 
   return (
     <>
@@ -82,7 +84,7 @@ const PlanetView = ({ planet }) => {
           src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
         alt="planet"
         onError={(e) => {
-          e.target.src = brokenUrlImg
+          e.target.src = placeholder
         }}
           />
       <div>
