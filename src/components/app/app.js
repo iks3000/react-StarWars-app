@@ -72,7 +72,7 @@ export default class App extends Component {
               </div>
 
               <Route path="/react-StarWars-app"
-                render={() => <h2 className="text-center">Welcome to Star Wars Data Base</h2>}
+                render={() => <h2 className="text-center">Welcome to Star Wars Database</h2>}
                 exact={true} />
               <Route path="/people"
                 render={() => <h2 className="text-center">People</h2>}
