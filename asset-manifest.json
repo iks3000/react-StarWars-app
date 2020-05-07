@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/react-StarWars-app/static/css/main.f862c3ff.chunk.css",
-    "main.js": "/react-StarWars-app/static/js/main.968248e6.chunk.js",
-    "main.js.map": "/react-StarWars-app/static/js/main.968248e6.chunk.js.map",
+    "main.js": "/react-StarWars-app/static/js/main.1f61c6b0.chunk.js",
+    "main.js.map": "/react-StarWars-app/static/js/main.1f61c6b0.chunk.js.map",
     "runtime-main.js": "/react-StarWars-app/static/js/runtime-main.e54fca00.js",
     "runtime-main.js.map": "/react-StarWars-app/static/js/runtime-main.e54fca00.js.map",
-    "static/js/2.7fcfe860.chunk.js": "/react-StarWars-app/static/js/2.7fcfe860.chunk.js",
-    "static/js/2.7fcfe860.chunk.js.map": "/react-StarWars-app/static/js/2.7fcfe860.chunk.js.map",
+    "static/js/2.135163fe.chunk.js": "/react-StarWars-app/static/js/2.135163fe.chunk.js",
+    "static/js/2.135163fe.chunk.js.map": "/react-StarWars-app/static/js/2.135163fe.chunk.js.map",
     "index.html": "/react-StarWars-app/index.html",
-    "precache-manifest.9a9faa2f48ec08276c99f934ba0d6db7.js": "/react-StarWars-app/precache-manifest.9a9faa2f48ec08276c99f934ba0d6db7.js",
+    "precache-manifest.bc04a7ebd486c4e36a7b1b4f1970f56c.js": "/react-StarWars-app/precache-manifest.bc04a7ebd486c4e36a7b1b4f1970f56c.js",
     "service-worker.js": "/react-StarWars-app/service-worker.js",
     "static/css/main.f862c3ff.chunk.css.map": "/react-StarWars-app/static/css/main.f862c3ff.chunk.css.map",
-    "static/js/2.7fcfe860.chunk.js.LICENSE.txt": "/react-StarWars-app/static/js/2.7fcfe860.chunk.js.LICENSE.txt",
+    "static/js/2.135163fe.chunk.js.LICENSE.txt": "/react-StarWars-app/static/js/2.135163fe.chunk.js.LICENSE.txt",
     "static/media/placeholder.jpg": "/react-StarWars-app/static/media/placeholder.e0d041e8.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.e54fca00.js",
-    "static/js/2.7fcfe860.chunk.js",
+    "static/js/2.135163fe.chunk.js",
     "static/css/main.f862c3ff.chunk.css",
-    "static/js/main.968248e6.chunk.js"
+    "static/js/main.1f61c6b0.chunk.js"
   ]
 }
