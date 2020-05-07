@@ -13,9 +13,9 @@ npm install
 npm start
 ```
 
-### How to buid
+### How to build
 ```
-npm run buid
+npm run build
 ```
 
 ### How to deploy
