@@ -11,6 +11,8 @@ import { SwapiServiceProvider } from '../swapi-service-context';
 import { PeoplePage, PlanetsPage, StarshipsPage } from '../pages';
 import './app.css';
 
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import ErrorBoundry from '../error-boundry';
 
 export default class App extends Component {
@@ -57,31 +59,35 @@ export default class App extends Component {
     return (
       <ErrorBoundry>
         <SwapiServiceProvider value={this.state.swapiService}>
-          <div className="container-fluid">
-            <Header onServiceChange={this.onServiceChange} />
-            {planet}
-            <div className="mb-3">
-              <button
-                className="toggle-planet btn btn-warning shadow-none mr-3"
-                onClick={this.toggleRandomPlanet}>
-                Toggle Random Planet
-              </button>
+          <Router>
+            <div className="container-fluid">
+              <Header onServiceChange={this.onServiceChange} />
+              {planet}
+              <div className="mb-3">
+                <button
+                  className="toggle-planet btn btn-warning shadow-none mr-3"
+                  onClick={this.toggleRandomPlanet}>
+                  Toggle Random Planet
+                </button>
+              </div>
+
+              <Route path="/people" component={PeoplePage} />
+              <Route path="/planets" component={PlanetsPage} />
+              <Route path="/starships" component={StarshipsPage} />
+
+              {/* <ErrorBoundry>
+                <PeoplePage />
+              </ErrorBoundry>
+
+              <ErrorBoundry>
+                <PlanetsPage />
+              </ErrorBoundry>
+
+              <ErrorBoundry>
+                <StarshipsPage />
+              </ErrorBoundry> */}
             </div>
-
-            <ErrorBoundry>
-              <PeoplePage />
-            </ErrorBoundry>
-
-            <ErrorBoundry>
-              <PlanetsPage />
-            </ErrorBoundry>
-
-            <ErrorBoundry>
-              <StarshipsPage />
-            </ErrorBoundry>
-
-
-          </div>
+          </Router>
         </SwapiServiceProvider>
       </ErrorBoundry>
     );
