@@ -63,13 +63,13 @@ export default class App extends Component {
             <div className="container-fluid">
               <Header onServiceChange={this.onServiceChange} />
               {planet}
-              <div className="mb-3">
+              {/* <div className="mb-3">
                 <button
                   className="toggle-planet btn btn-warning shadow-none mr-3"
                   onClick={this.toggleRandomPlanet}>
                   Toggle Random Planet
                 </button>
-              </div>
+              </div> */}
 
               <Route path="/react-StarWars-app"
                 render={() => <h2 className="text-center">Welcome to Star Wars Database</h2>}
@@ -83,15 +83,7 @@ export default class App extends Component {
 
               {/* <ErrorBoundry>
                 <PeoplePage />
-              </ErrorBoundry>
-
-              <ErrorBoundry>
-                <PlanetsPage />
-              </ErrorBoundry>
-
-              <ErrorBoundry>
-                <StarshipsPage />
-              </ErrorBoundry> */}
+              </ErrorBoundry>*/}
             </div>
           </Router>
         </SwapiServiceProvider>
