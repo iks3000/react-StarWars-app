@@ -9,6 +9,7 @@ import SwapiService from '../../services/swapi-service';
 
 import { SwapiServiceProvider } from '../swapi-service-context';
 import { PeoplePage, PlanetsPage, StarshipsPage } from '../pages';
+import { StarshipDetails } from '../star-wars-components'
 import './app.css';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -72,14 +73,29 @@ export default class App extends Component {
               </div> */}
 
               <Route path="/react-StarWars-app"
-                render={() => <h2 className="text-center">Welcome to Star Wars Database</h2>}
+                render={() => <h2 className="text-center text-success">Welcome to Star Wars Database</h2>}
                 exact={true} />
+
               <Route path="/people"
-                render={() => <h2 className="text-center">People</h2>}
+                render={() => <h2 className="mb-4 text-success">People</h2>}
                 exact />
-              <Route path="/people" component={PeoplePage} />
+              <Route path="/people/:id?" component={PeoplePage} />
+
+              <Route path="/planets"
+                render={() => <h2 className="mb-4 text-success">Planets</h2>}
+                exact />
               <Route path="/planets" component={PlanetsPage} />
-              <Route path="/starships" component={StarshipsPage} />
+
+              <Route path="/starships"
+                render={() => <h2 className="mb-4 text-success">Starships</h2>}
+                exact />
+              <Route path="/starships" exact component={StarshipsPage} />
+              <Route path="/starships/:id"
+                render={({ match }) => {
+                  const { id } = match.params
+                  //console.log(match)
+                  return <StarshipDetails itemId={id}/>
+                }}/>
 
               {/* <ErrorBoundry>
                 <PeoplePage />
