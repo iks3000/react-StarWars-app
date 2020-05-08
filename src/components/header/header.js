@@ -13,6 +13,8 @@ const Header = ({ onServiceChange }) => {
         <Link className="nav-link bg-primary" to="/people/">People</Link>
         <Link className="nav-link bg-primary" to="/planets/">Planets</Link>
         <Link className="nav-link bg-primary" to="/starships/">Starships</Link>
+        <Link className="nav-link bg-primary" to="/login">Login</Link>
+        <Link className="nav-link bg-primary" to="/secret">Secret</Link>
       </nav>
       <button
         className="btn btn-info btn-sm shadow-none ml-5"
