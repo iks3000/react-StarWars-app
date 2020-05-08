@@ -8,7 +8,7 @@ import DummySwapiService from '../../services/dummy-swapi-service';
 import SwapiService from '../../services/swapi-service';
 
 import { SwapiServiceProvider } from '../swapi-service-context';
-import { PeoplePage, PlanetsPage, StarshipsPage } from '../pages';
+import { PeoplePage, PlanetsPage, StarshipsPage, LoginPage, SecretPage } from '../pages';
 import { StarshipDetails } from '../star-wars-components'
 import './app.css';
 
@@ -22,7 +22,14 @@ export default class App extends Component {
     swapiService: new SwapiService(),
     showRandomPlanet: true,
     hasError: false,
+    isLoggedIn: false,
   };
+
+  onLogin = () => {
+    this.setState({
+      isLoggedIn: true
+    })
+  }
 
   onServiceChange = () => {
     this.setState(({swapiService}) => {
@@ -50,6 +57,8 @@ export default class App extends Component {
 
   render() {
 
+    const { isLoggedIn } = this.state;
+
     if (this.state.hasError) {
       return <ErrorIndicator />
     }
@@ -73,7 +82,10 @@ export default class App extends Component {
               </div> */}
 
               <Route path="/react-StarWars-app"
-                render={() => <h2 className="text-center text-success">Welcome to Star Wars Database</h2>}
+                render={() => (
+                  <div className="jumbotron">
+                    <h2 className="text-center text-success">Welcome to Star Wars Database</h2>
+                  </div>)}
                 exact={true} />
 
               <Route path="/people"
@@ -95,7 +107,21 @@ export default class App extends Component {
                   const { id } = match.params
                   //console.log(match)
                   return <StarshipDetails itemId={id}/>
-                }}/>
+                }} />
+
+              <Route
+                path="/login"
+                render={() => (
+                  <LoginPage
+                    isLoggedIn={isLoggedIn}
+                    onLogin={this.onLogin}
+                  />
+                )}
+              />
+              <Route
+                path="/secret"
+                render={() => (<SecretPage isLoggedIn={isLoggedIn} />)}
+              />
 
               {/* <ErrorBoundry>
                 <PeoplePage />
