@@ -12,7 +12,7 @@ import { PeoplePage, PlanetsPage, StarshipsPage, LoginPage, SecretPage } from '.
 import { StarshipDetails } from '../star-wars-components'
 import './app.css';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import ErrorBoundry from '../error-boundry';
 
@@ -81,47 +81,41 @@ export default class App extends Component {
                 </button>
               </div> */}
 
-              <Route path="/react-StarWars-app"
-                render={() => (
-                  <div className="jumbotron">
-                    <h2 className="text-center text-success">Welcome to Star Wars Database</h2>
-                  </div>)}
-                exact={true} />
+              <Switch>
+                <Route path="/react-StarWars-app"
+                  render={() => (
+                    <div className="jumbotron">
+                      <h2 className="text-center text-success">Welcome to Star Wars Database</h2>
+                    </div>)}
+                  exact={true} />
+                <Route path="/react-StarWars-app/people/:id?" component={PeoplePage} />
+                <Route path="/react-StarWars-app/planets" component={PlanetsPage} />
+                <Route path="/react-StarWars-app/starships" exact component={StarshipsPage} />
+                <Route path="/react-StarWars-app/starships/:id"
+                  render={({ match }) => {
+                    const { id } = match.params
+                    //console.log(match)
+                    return <StarshipDetails itemId={id} />
+                  }} />
+                <Route
+                  path="/react-StarWars-app/login"
+                  render={() => (
+                    <LoginPage
+                      isLoggedIn={isLoggedIn}
+                      onLogin={this.onLogin}
+                    />
+                  )}
+                />
+                <Route
+                  path="/react-StarWars-app/secret"
+                  render={() => (<SecretPage isLoggedIn={isLoggedIn} />)}
+                />
 
-              <Route path="/people"
-                render={() => <h2 className="mb-4 text-success">People</h2>}
-                exact />
-              <Route path="/people/:id?" component={PeoplePage} />
-
-              <Route path="/planets"
-                render={() => <h2 className="mb-4 text-success">Planets</h2>}
-                exact />
-              <Route path="/planets" component={PlanetsPage} />
-
-              <Route path="/starships"
-                render={() => <h2 className="mb-4 text-success">Starships</h2>}
-                exact />
-              <Route path="/starships" exact component={StarshipsPage} />
-              <Route path="/starships/:id"
-                render={({ match }) => {
-                  const { id } = match.params
-                  //console.log(match)
-                  return <StarshipDetails itemId={id}/>
-                }} />
-
-              <Route
-                path="/login"
-                render={() => (
-                  <LoginPage
-                    isLoggedIn={isLoggedIn}
-                    onLogin={this.onLogin}
-                  />
-                )}
-              />
-              <Route
-                path="/secret"
-                render={() => (<SecretPage isLoggedIn={isLoggedIn} />)}
-              />
+                {/* if page not found 404 */}
+                {/* <Redirect to="/react-StarWars-app" /> */}
+                {/* or */}
+                <Route render={() => <h2 className="text-warning text-center">Page not found</h2>}/>
+              </Switch>
 
               {/* <ErrorBoundry>
                 <PeoplePage />
