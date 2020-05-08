@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "560fcab0d637292d6bd64ac2b21a89b2",
+    "revision": "a957a7faaec2c0e71ec68471901528fd",
     "url": "/react-StarWars-app/index.html"
   },
   {
-    "revision": "57378ef7f5b0bb744015",
+    "revision": "dbc5c8f6e72e849b70c4",
     "url": "/react-StarWars-app/static/css/main.55a3785a.chunk.css"
   },
   {
-    "revision": "668a93f26d203feca497",
-    "url": "/react-StarWars-app/static/js/2.1199af43.chunk.js"
+    "revision": "e007febcfa9309cd839a",
+    "url": "/react-StarWars-app/static/js/2.d5cdd52c.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/react-StarWars-app/static/js/2.1199af43.chunk.js.LICENSE.txt"
+    "url": "/react-StarWars-app/static/js/2.d5cdd52c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "57378ef7f5b0bb744015",
-    "url": "/react-StarWars-app/static/js/main.879d9c2b.chunk.js"
+    "revision": "dbc5c8f6e72e849b70c4",
+    "url": "/react-StarWars-app/static/js/main.57c5d8f6.chunk.js"
   },
   {
     "revision": "9bc3c8d28d47cd6068f6",
