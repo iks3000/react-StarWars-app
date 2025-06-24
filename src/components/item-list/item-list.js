@@ -4,7 +4,7 @@ import { withData } from '../hoc-helpers';
 import './item-list.css';
 
 const ItemList = (props) => {
-  const { data, onItemSelected, children: renderLabel } = props;
+  const { data, onItemSelected = () => { }, children: renderLabel } = props;
 
   const items = data.map((item) => {
     const { id } = item;
@@ -25,10 +25,6 @@ const ItemList = (props) => {
     </ul>
   );
 };
-
-ItemList.defaultProps = {
-  onItemSelected: () => {}
-}
 
 ItemList.propTypes = {
   onItemSelected: PropTypes.func,

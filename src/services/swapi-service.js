@@ -1,23 +1,29 @@
+import { getImage } from '../utils/getImage';
+
 export default class SwapiService {
 
-  _apiBase = 'https://swapi.dev/api';
-  _imageBase = 'https://starwars-visualguide.com/assets/img';
+  _apiBase = 'https://swapi.py4e.com/api';
 
   getResource = async (url) => {
-    const res = await fetch(`${this._apiBase}${url}`);
+    try {
+      const res = await fetch(`${this._apiBase}${url}`);
 
-    if (!res.ok) {
-      throw new Error(`Could not fetch ${url}` +
-        `, received ${res.status}`)
+      if (!res.ok) {
+        throw new Error(`Could not fetch ${url}` +
+          `, received ${res.status}`)
+      }
+      return await res.json();
+    } catch (error) {
+      console.error('API Error:', error);
+      throw error;
     }
-    return await res.json();
   }
 
   getAllPeople = async () => {
     const res = await this.getResource(`/people/`);
     return res.results
       .map(this._transformPerson)
-      // .slice(0, 6);
+    // .slice(0, 6);
   };
 
   getPerson = async (id) => {
@@ -29,7 +35,7 @@ export default class SwapiService {
     const res = await this.getResource(`/planets/`);
     return res.results
       .map(this._transformPlanet)
-      // .slice(0, 6);
+    // .slice(0, 6);
   };
 
   getPlanet = async (id) => {
@@ -48,21 +54,25 @@ export default class SwapiService {
     return this._transformStarship(starship);
   };
 
-  getPersonImage = ({id}) => {
-    return `${this._imageBase}/characters/${id}.jpg`
+  getPersonImage = ({ id }) => {
+    const localImage = getImage('people', id);
+    return localImage || require('../components/random-planet/placeholder.jpg');
   };
 
-  getStarshipImage = ({id}) => {
-    return `${this._imageBase}/starships/${id}.jpg`
+  getStarshipImage = ({ id }) => {
+    const localImage = getImage('starships', id);
+    return localImage || require('../components/random-planet/placeholder.jpg');
   };
 
-  getPlanetImage = ({id}) => {
-    return `${this._imageBase}/planets/${id}.jpg`
+  getPlanetImage = ({ id }) => {
+    const localImage = getImage('planets', id);
+    return localImage || require('../components/random-planet/placeholder.jpg');
   };
 
   _extractId = (item) => {
     const idRegExp = /\/([0-9]*)\/$/;
-    return item.url.match(idRegExp)[1];
+    const id = item.url.match(idRegExp)[1];
+    return id;
   };
 
   _transformPlanet = (planet) => {

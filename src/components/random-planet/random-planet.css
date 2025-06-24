@@ -7,9 +7,11 @@
 
 .random-planet .planet-image {
   width: 150px;
-  height: 150px;
+  height: auto;
+  max-height: 150px;
   border-radius: 10px;
   margin-right: 1rem;
+  background: #222;
 }
 
 .random-planet .list-group {

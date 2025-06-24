@@ -12,7 +12,7 @@ import { PeoplePage, PlanetsPage, StarshipsPage, LoginPage, SecretPage } from '.
 import { StarshipDetails } from '../star-wars-components'
 import './app.css';
 
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import ErrorBoundry from '../error-boundry';
 
@@ -32,7 +32,7 @@ export default class App extends Component {
   }
 
   onServiceChange = () => {
-    this.setState(({swapiService}) => {
+    this.setState(({ swapiService }) => {
       const Service = swapiService instanceof SwapiService ? DummySwapiService : SwapiService;
       console.log("swiched to", Service.name);
 
@@ -50,8 +50,11 @@ export default class App extends Component {
     });
   };
 
+  componentDidMount() {
+  }
+
   componentDidCatch() {
-    this.setState({hasError: true})
+    this.setState({ hasError: true })
   }
 
 
@@ -114,7 +117,7 @@ export default class App extends Component {
                 {/* if page not found 404 */}
                 {/* <Redirect to="/react-StarWars-app" /> */}
                 {/* or */}
-                <Route render={() => <h2 className="text-warning text-center">Page not found</h2>}/>
+                <Route render={() => <h2 className="text-warning text-center">Page not found</h2>} />
               </Switch>
 
               {/* <ErrorBoundry>

@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 # Star Wars Database
 
-> ### [The Star Wars API](https://swapi.dev/)
+> ### [The Star Wars API](https://swapi.py4e.com/)
 > All the Star Wars data you've ever wanted:
 Planets, Spaceships, Vehicles, People, Films and Species
 

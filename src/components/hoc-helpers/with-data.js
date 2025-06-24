@@ -34,7 +34,7 @@ const withData = (View) => {
             loading: false
           });
         })
-        .catch(() => {
+        .catch((err) => {
           this.setState({
             error: true,
             loading: false

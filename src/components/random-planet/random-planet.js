@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 import SwapiService from '../../services/swapi-service';
+import { getImage } from '../../utils/getImage';
 import placeholder from './placeholder.jpg';
 import './random-planet.css';
 
 export default class RandomPlanet extends Component {
 
-  static defaultProps = {
-    updateInterval: 10000
+  constructor(props) {
+    super(props);
+    this.updateInterval = props.updateInterval || 10000;
   }
 
   static propTypes = {
@@ -24,9 +26,8 @@ export default class RandomPlanet extends Component {
   };
 
   componentDidMount() {
-    const { updateInterval } = this.props;
     this.updatePlanet();
-    this.interval = setInterval(this.updatePlanet, updateInterval);
+    this.interval = setInterval(this.updatePlanet, this.updateInterval);
   }
 
   componentWillUnmount() {
@@ -49,7 +50,11 @@ export default class RandomPlanet extends Component {
   };
 
   updatePlanet = () => {
-    const id = Math.floor(Math.random()*27) + 2;
+    let id;
+    do {
+      id = Math.floor(Math.random() * 27) + 2;
+    } while (id === 28); // Исключаем планету с id=28 (unknown)
+
     this.swapiService
       .getPlanet(id)
       .then(this.onPlanetLoaded)
@@ -61,9 +66,9 @@ export default class RandomPlanet extends Component {
     const { planet, loading, error } = this.state;
 
     const hasData = !(loading || error);
-    const errorMessage = error ? <ErrorIndicator/> : null;
+    const errorMessage = error ? <ErrorIndicator /> : null;
     const spinner = loading ? <Spinner /> : null;
-    const content = hasData ? <PlanetView planet={planet}/> : null;
+    const content = hasData ? <PlanetView planet={planet} /> : null;
 
     return (
       <div className="random-planet jumbotron">
@@ -77,16 +82,15 @@ export default class RandomPlanet extends Component {
 
 const PlanetView = ({ planet }) => {
   const { id, name, population, rotationPeriod, diameter } = planet;
+  const imgSrc = getImage('planets', id) || placeholder;
 
   return (
     <>
       <img className="planet-image"
-          src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
+        src={imgSrc}
         alt="planet"
-        onError={(e) => {
-          e.target.src = placeholder
-        }}
-          />
+        onError={e => { e.target.src = placeholder; }}
+      />
       <div>
         <h4>{name}</h4>
         <ul className="list-group list-group-flush">
@@ -101,6 +105,9 @@ const PlanetView = ({ planet }) => {
           <li className="list-group-item">
             <span className="term">Diameter</span>
             <span>{diameter}</span>
+          </li>
+          <li className="list-group-item">
+            <span className="term">id={id}</span>
           </li>
         </ul>
       </div>

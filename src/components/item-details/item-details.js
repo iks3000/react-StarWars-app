@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SwapiService from '../../services/swapi-service';
-import ErrorButton from '../error-button';
 import './item-details.css';
 import placeholder from './placeholder.jpg';
 
@@ -33,9 +32,10 @@ export default class ItemDetails extends Component {
 
     getData(itemId)
       .then((item) => {
+        const imageUrl = getImgUrl(item);
         this.setState({
           item,
-          image: getImgUrl(item),
+          image: imageUrl,
           loading: false
         });
       })
@@ -69,11 +69,10 @@ export default class ItemDetails extends Component {
           <ul className="list-group list-group-flush mb-3">
             {
               React.Children.map(this.props.children, (child) => {
-                return React.cloneElement(child, {item});
+                return React.cloneElement(child, { item });
               })
             }
           </ul>
-          {/* <ErrorButton /> */}
         </div>
       </div>
     )
